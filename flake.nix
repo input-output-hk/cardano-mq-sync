@@ -40,8 +40,6 @@
           inherit (haskellNix) config;
         };
 
-        devShell = (import ./shell.nix { inherit pkgs; }).dev;
-
         flake = pkgs.cardanoMqSyncProject.flake {
         };
 
@@ -80,9 +78,6 @@
 
         # Run by `nix run .`
         defaultApp = flake.apps."cardano-mq-sync:exe:cardano-mq-sync";
-
-        # This is used by `nix develop .` to open a devShell
-        inherit devShell;
 
         apps = {
           repl = mkApp {

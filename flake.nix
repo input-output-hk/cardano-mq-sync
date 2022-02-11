@@ -39,6 +39,7 @@
           inherit system overlays;
           inherit (haskellNix) config;
         };
+        devShell = import ./shell.nix { inherit pkgs; };
 
         flake = pkgs.cardanoMqSyncProject.flake {
         };
@@ -69,7 +70,7 @@
 
       in recursiveUpdate flake {
 
-        inherit packages checks;
+        inherit packages checks devShell;
 
         legacyPackages = pkgs;
 

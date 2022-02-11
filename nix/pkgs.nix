@@ -18,7 +18,7 @@ final: prev: with final;
   inherit (cardanoMqSyncHaskellPackages.cardano-mq-sync.components.exes) cardano-mq-sync;
 
   cabal = haskell-nix.tool compiler-nix-name "cabal" {
-    version = "latest";
+    version = "3.6.2.0";
     inherit (cardanoMqSyncProject) index-state;
   };
 
@@ -33,7 +33,7 @@ final: prev: with final;
   };
 
   haskell-language-server = haskell-nix.tool compiler-nix-name "haskell-language-server" {
-    version = "latest";
+    version = "1.5.1.0";
     inherit (cardanoMqSyncProject) index-state;
   };
 

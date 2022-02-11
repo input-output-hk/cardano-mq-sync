@@ -17,7 +17,7 @@ cardanoMqSyncProject.shellFor {
     pkg-config
     hlint
     ghcid
-    #haskell-language-server
+    haskell-language-server
     cabalWrapped
     # we also add cabal (even if cabalWrapped will be used by default) for shell completion:
     cabal

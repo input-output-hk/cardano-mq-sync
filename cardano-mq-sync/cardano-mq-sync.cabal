@@ -38,6 +38,7 @@ executable cardano-mq-sync
                        bytestring,
                        cardano-ledger-alonzo,
                        cardano-api,
+                       cardano-crypto-class,
                        cardano-ledger-core,
                        cardano-ledger-shelley,
                        compact-map,

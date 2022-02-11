@@ -7,11 +7,14 @@
 
 import           Cardano.Api
 import qualified Data.Text as T
+import qualified Data.Text.Encoding as T
 import           Options.Applicative (Parser, (<**>))
 import qualified Options.Applicative as Opt
 import           Control.Monad.Trans.Except (runExceptT)
 import           Network.AMQP
 import qualified Data.ByteString.Lazy.Char8 as BL
+import qualified Data.ByteString.Base16 as B16
+import           Cardano.Crypto.Hash.Class (hashToBytesAsHex)
 
 msg :: Channel -> Block era -> IO (Maybe Int)
 msg chan block =
@@ -19,9 +22,10 @@ msg chan block =
     chan
     ""
     "cardano-mq-sync"
-    (newMsg {msgBody = (BL.pack (show blockHeaderHash)), msgDeliveryMode = Just Persistent})
+    (newMsg {msgBody = (BL.pack (show $ convertHash blockHeaderHash)), msgDeliveryMode = Just Persistent})
   where
     (Block (BlockHeader _slotNo blockHeaderHash (BlockNo _blockNoI)) _transactions) = block
+    convertHash = T.decodeLatin1 . B16.encode . serialiseToRawBytes
 
 data Args = Args
   { conf         :: String
